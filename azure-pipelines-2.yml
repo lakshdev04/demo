@@ -10,6 +10,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# publish an artifact called drop
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/TestPHP' 
+    includeRootFolder: true 
+    archiveType: 'zip' # Options: zip, 7z, tar, wim
+    #tarCompression: 'gz' # Optional. Options: gz, bz2, xz, none
+    archiveFile: '$(System.DefaultWorkingDirectory)/TestPHP.zip' 
+    replaceExistingArchive: true 
+    #verbose: # Optional
+    #quiet: # Optional
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
